@@ -1,0 +1,36 @@
+@media screen and (max-width: 480px) {
+    .heading{
+        margin-top: 5%;
+        font-weight: bolder;
+    }
+    .credit{
+        display: none;
+    }
+    .container{
+        width: 90vw;
+        height: 80vh;
+        position: relative;
+    }
+    .inp{
+        width: 62%;
+        padding: 4px;
+    }
+    .inpsection{
+        padding: 1%;
+        padding-bottom: 2%;
+        gap: 12px
+    }
+    #showdeleted{
+        position: fixed;
+        bottom: 12vh;
+        left: 80vw;
+        z-index: 100;
+    }
+    .tasklayout{
+        display: flex;
+        align-items: center;
+    }
+    .tasklayout button{
+        height: fit-content;
+    }
+  }

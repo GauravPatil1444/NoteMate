@@ -1,0 +1,152 @@
+.container{
+    background-color: rgba(198, 231, 255, 0.578);
+    width: 40vw;
+    height: 60vh;
+    margin-top: 2%;
+    border-radius: 12px;
+    overflow-y: scroll;
+    scroll-behavior: smooth; 
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+}
+
+.container::-webkit-scrollbar {
+    display: none;
+}
+.inp{
+    border: 1px solid black;
+    background-color: transparent;
+    padding: 8px;
+    width: 75%;
+    border-radius: 8px;
+    font-size: medium;
+}
+.inp:focus{
+    outline: none;
+    border: 2px solid  rgb(59, 173, 255);  
+}
+.inpsection{
+    height: fit-content;
+    border-bottom: 2px solid black;
+    padding: 2%;
+    margin: 15px;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+#addbtn{
+    width: fit-content;
+    border: 1px solid black;
+    background-color: rgb(50, 170, 255);
+    padding: 8px;
+    border-radius: 8px;
+    font-size: medium;
+    cursor: pointer;
+}
+#addbtn:active{
+    outline: none;
+    background-color: rgb(82, 180, 250);
+}
+.taskcontainer{
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    padding: 2%; 
+    gap: 8px;
+    flex-wrap: wrap;
+    /* background-color: aqua; */
+    align-items: center;
+}
+.taskcontainer::-webkit-scrollbar {
+    display: none;
+}
+.task{
+    display: flex;
+    width: 75%;
+    overflow-x: scroll;
+    align-items: center;
+    overflow-wrap: anywhere;
+}
+.task::-webkit-scrollbar {
+    display: none;
+}
+.tasklayout{
+    border: 1px solid black;
+    width: 85%;
+    padding: 5px;
+    border-radius: 8px;
+    display: flex;
+    gap: 15px;
+}
+.delbtn{
+    background-color: red;
+    width: fit-content;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: medium;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.delbtn img{ 
+    background-color: red;
+}
+.rycbtn{
+    background-color: green;
+    width: fit-content;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: medium;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.rycbtn img{ 
+    background-color: green;
+}
+.edtbtn{
+    background-color: rgb(50, 170, 255);
+    width: fit-content;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: medium;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+}
+.edtbtn img{ 
+    background-color: rgb(50, 170, 255);
+}
+#showdeleted{
+    width: 52px;
+    height: 55px;
+    position: sticky;
+    bottom: 10px;
+    left: 90%;
+    display: inline-block;
+    margin: auto;
+    border-radius: 50%;
+    padding: 15px;
+    background-color: rgb(50, 170, 255);
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-size: larger ;
+    display: flex;
+    align-items: center;
+}
+#showdeleted img{
+    width: 25px;
+    background-color: rgb(50, 170, 255);
+}
+#showdeleted:active{
+background-color: rgb(82, 180, 250);
+outline: none;
+}   
