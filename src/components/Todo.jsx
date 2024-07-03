@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import "./Container.css"
+import "./Todo.css"
 import "./Container-mobile.css"
 import trash from "../assets/trash.png"
 import recycle from "../assets/recycle-bin.png" 
 import editicon from "../assets/edit.png"
 import cross from "../assets/cross.png"
+import { auth } from '../firebase'
+import { doc, getDoc, setDoc } from 'firebase/firestore'
+import { db } from '../firebase'
 
-const Container = (props) => {
+const Todo = (props) => {
 
   const [inp, setinp] = useState("")
   const [deleted, setdeleted] = useState([])
@@ -15,12 +18,52 @@ const Container = (props) => {
   const [edit, setedit] = useState([false,0])
   const [addbtn, setaddbtn] = useState("Add task +")
 
+  useEffect(() => {
+    if(localStorage.getItem("status")){
+      fetchdata();
+    }
+    else{
+      window.location.href="/Login";
+    }
+  }, [])
+
+  const updatelist = (list)=>{
+    auth.onAuthStateChanged(async(user)=>{
+      await setDoc(doc(db, "Users", user.uid), {
+        tasklist: list,
+      }, { merge: true });
+    })
+  }
+
+  const decrementlist = (list)=>{
+    auth.onAuthStateChanged(async(user)=>{
+      await setDoc(doc(db, "Users", user.uid), {
+        deleted: list,
+      }, { merge: true });
+    })
+  }
+
+  const fetchdata = async ()=>{
+    auth.onAuthStateChanged(async (user)=>{
+      const docref = doc(db,"Users",user.uid);
+      const docsnap = await getDoc(docref);
+      if(docsnap.exists()){
+        console.log(docsnap.data());
+        setdeleted(docsnap.data().deleted);
+        props.settasklist(docsnap.data().tasklist);
+      }
+      else{
+        console.log("No data in the database !")
+      }
+    }) 
+  }
+  
   const handleAdd = ()=>{
-    console.log(inp,edit[0])
     const list = [...props.tasklist]
     if(edit[0]){
-      list.splice(edit[1],1,inp)
-      props.settasklist(list)
+      list.splice(edit[1],1,inp);
+      props.settasklist(list);
+      updatelist(list);
       setedit([false,0])
       setinp("")
       setaddbtn("Add task +")
@@ -28,6 +71,7 @@ const Container = (props) => {
     else{
       props.settasklist([...list,inp])
       setinp("")
+      updatelist([...list,inp]);
     }
   }
 
@@ -35,7 +79,9 @@ const Container = (props) => {
     const newTasklist = [...props.tasklist];
     newTasklist.splice(i, 1);
     props.settasklist(newTasklist);
+    updatelist(newTasklist);
     setdeleted([...deleted,task])
+    decrementlist([...deleted,task]);
     history.map((hist)=>{
       hist[0]==i && ++i; 
     }) 
@@ -59,6 +105,8 @@ const Container = (props) => {
     delTasklist.splice(i, 1);
     setdeleted(delTasklist);
     props.settasklist(Tasklist)
+    decrementlist(delTasklist)
+    updatelist(Tasklist)
   }
 
   const handleedit = (i,task)=>{
@@ -72,6 +120,7 @@ const Container = (props) => {
     const deletelist = [...deleted];
     deletelist.splice(i,1);
     setdeleted(deletelist);
+    decrementlist(deletelist);
   }
 
   useEffect(() => {
@@ -80,6 +129,7 @@ const Container = (props) => {
 
   return (
     <div className='container'>
+      <div className='heading'><h1>TODO</h1><h5 className='credit'>- By NoteMate</h5></div>
       <span className="inpsection">
         <input onChange={(e)=>{setinp(e.target.value)}} value={inp} type="text" className='inp' placeholder='Enter task'/>
         <button onClick={handleAdd} id='addbtn'>{addbtn}</button>
@@ -98,4 +148,4 @@ const Container = (props) => {
   )
 }
 
-export default Container
+export default Todo

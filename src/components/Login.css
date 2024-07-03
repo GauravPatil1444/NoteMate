@@ -1,0 +1,49 @@
+.form{
+    padding: 5%;
+    background-color: rgba(198, 231, 255, 0.578);
+    border-radius: 12px;
+    width: 40vw;
+    height: fit-content;
+}
+form{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: transparent;
+}
+.inp{
+    width: 80%;
+}
+.submitbtn{
+    padding: 5px;
+    width: 25%;
+    border-radius: 8px;
+    background-color: rgb(50, 170, 255);
+    border: 1px solid black;
+    font-size: larger;
+}
+.submitbtn:active{
+    outline: none;
+    background-color: rgb(82, 180, 250);
+}
+.red{
+    background-color: transparent;
+    color: red;
+}
+.create-signin{
+    margin-top: 10px;
+    background-color: transparent;
+}
+.loader{
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+p{
+    background-color: transparent;
+    font-size: xx-large;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}

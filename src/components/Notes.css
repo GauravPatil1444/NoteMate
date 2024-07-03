@@ -1,0 +1,163 @@
+*::-webkit-scrollbar {
+    display: none;
+    margin: 0%;
+    padding: 0%;
+}
+.notes{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+.content{
+    width: 65vw;
+    height: 100vh;
+    overflow-y: scroll;
+    justify-content: center;
+    padding: 5px;
+    margin-top: 10vh;
+    background-color: brown;
+}
+.noteinp{
+    width: 90%;
+    padding: 10px;
+    font-size: larger;
+    height: fit-content;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    overflow-wrap: anywhere;
+    resize: none;
+}
+.noteinp:focus{
+    border: 2px solid rgb(50, 170, 255);
+}
+.addnote{
+    width: fit-content;
+    height: fit-content;    
+    padding: 15px;
+    box-shadow: 0.5px 0.5px 15px 0.5px; 
+    border-radius: 8px;
+}
+#title{
+    font-size: x-large; 
+    height: 4vh;
+}
+#note{
+    height: 4vh;
+}
+#takenote{
+    box-shadow: 0.5px 0.5px 15px 0.5px; 
+}
+.addnote-footer{
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 8px;
+    justify-content: space-between;
+}
+#addbtn{
+    width: fit-content;
+    border: none;
+    background-color: rgb(50, 170, 255);
+    padding: 8px;
+    border-radius: 8px;
+    font-size: medium;
+    cursor: pointer;
+}
+#addbtn:active{
+    outline: none;
+    background-color: rgb(82, 180, 250);
+}
+.showdeleted{
+    width: 52px;
+    height: 55px;
+    position: fixed;
+    top: 11vh;
+    left: 81vw;
+    display: inline-block;
+    margin: auto;
+    border-radius: 50%;
+    padding: 15px;
+    background-color: rgb(50, 170, 255);
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-size: larger ;
+    display: flex;
+    align-items: center;
+}
+.showdeleted img{
+    width: 25px;
+    background-color: rgb(50, 170, 255);
+}
+.showdeleted:active{
+background-color: rgb(82, 180, 250);
+outline: none;
+}   
+.notelayout{
+    width: fit-content;
+    height: fit-content;
+    max-width: 40vw;
+    max-height: 40vh;
+    padding: 5px;
+    border: 1px solid black;
+    background-color: transparent;
+    border-radius: 8px;
+    overflow-wrap: anywhere;
+    cursor: pointer;
+}
+.notelayout:hover{
+    border: 2px solid rgb(82, 180, 250);
+}
+.title{
+    font-size: larger;
+}
+.notecontainer{
+    margin-top: 2%;
+    display: flex;
+    flex-direction: row;
+    background-color: transparent;
+    gap: 15px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    flex-wrap: wrap;
+    background-color: aqua;
+}
+.addnotecontainer{
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+}
+#delbtn{
+    background-color: red;
+    width: fit-content;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: medium;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+#delbtn img{ 
+    background-color: red;
+}
+#rycbtn{
+    background-color: green;
+    width: fit-content;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: medium;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+#rycbtn img{ 
+    background-color: green;
+}
+#Notes-btns{
+ display: flex;
+ flex-direction: row;
+ gap: 8px;   
+}
