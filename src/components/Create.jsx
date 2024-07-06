@@ -1,8 +1,8 @@
 import React from 'react'
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import "./Login.css"
+import "./Login-mobile.css"
 import { auth,db } from '../firebase'
 import { doc, setDoc } from 'firebase/firestore'
 
@@ -17,7 +17,8 @@ const Create = () => {
         await setDoc(doc(db,"Users",user.uid),{
           email :user.email,
           username: getValues("username"),
-        })
+          photo: "null"
+        });
         localStorage.setItem("status",true);
         window.location.href="/"
       }
@@ -50,8 +51,9 @@ const Create = () => {
       return (
         <>
           <div className='form'>
-            <p>Create account</p>
+            <p>NoteMate</p>
             <form action=" " method="post" onSubmit={handleSubmit(onSubmit)}>
+              <p>Create account</p>
               <input className='inp' type="text" placeholder='Username'{...register("username",{required:{value:true,message:"This field is required !"},minLength:{value:4,message:"Minimum length is 4"},maxLength:{value:20,message:"Maximum length is 10"}})}/>
               {errors.username && <div className='red'>{errors.username.message}</div>}
               <br />
@@ -63,7 +65,7 @@ const Create = () => {
               <br />
               <input className='submitbtn' disabled={isSubmitting} type="submit" value="Create" />
                 {isSubmitting && <div className='loader'>Loading...</div>}
-              <div className="create-signin">Already has an account ! <a className='create-signin' href="/Login">Login</a></div>  
+              <div className="create-signin">Already has an account ! <a className='link' href="/Login">Login</a></div>  
             </form>
           </div>
         </>

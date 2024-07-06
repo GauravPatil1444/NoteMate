@@ -1,15 +1,19 @@
 .form{
-    padding: 5%;
-    background-color: rgba(198, 231, 255, 0.578);
-    border-radius: 12px;
-    width: 40vw;
-    height: fit-content;
-}
-form{
+    width: 100vw;
+    height: 100vh;
     display: flex;
     align-items: center;
     flex-direction: column;
-    background-color: transparent;
+}
+form{
+    padding: 10px;
+    border-radius: 12px;
+    height: fit-content;
+    width: 30vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--containerbackground);
 }
 .inp{
     width: 80%;
@@ -18,21 +22,22 @@ form{
     padding: 5px;
     width: 25%;
     border-radius: 8px;
-    background-color: rgb(50, 170, 255);
-    border: 1px solid black;
+    background-color: var(--primaryblue);
+    border: 1px solid var(--element);
     font-size: larger;
 }
 .submitbtn:active{
     outline: none;
-    background-color: rgb(82, 180, 250);
+    background-color: var(--secondaryblue);
 }
 .red{
     background-color: transparent;
-    color: red;
+    color: var(--red);
 }
 .create-signin{
     margin-top: 10px;
     background-color: transparent;
+    color: var(--element);
 }
 .loader{
     background-color: transparent;
@@ -46,4 +51,33 @@ p{
     display: flex;
     justify-content: center;
     margin-bottom: 15px;
+    color: var(--element);
+}
+.link{
+    color: var(--primaryblue);
+    text-decoration: none;
+}
+#or{
+    color: var(--element);
+    display: flex;
+    flex-direction: row;
+    width: 75%;
+    align-items: center;
+    margin-top: 2%;
+    gap: 5px;
+}
+#or div{
+    background-color: var(--element);
+    width: 80%;
+    height: 0.1px;
+}
+#google{
+    display: flex;
+    justify-content: center;
+    border: none;
+    outline: none;
+}
+#googleimg{
+    width: 50%;
+    cursor: pointer;
 }

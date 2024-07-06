@@ -6,4 +6,23 @@
     .showdeleted{
         top: 82vh;
     }
+    .notecontainer{
+        padding: 5px;
+        margin-top: 3%;
+    }
+    .notelayout{
+        max-width: 38vw;
+        max-height: 15vh;
+        min-width: 22vw;    
+        min-height: 10vh;
+        border: 0.2px solid var(--element);
+    }
+    .userprofile{
+        top: 10vh;
+        right: 0vw;
+        width: 75vw;
+        z-index: 1000;
+        /* backdrop-filter: blur(25px); */
+        /* background-color: var(--element); */
+    }
 }

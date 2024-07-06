@@ -9,19 +9,24 @@ import Notes from './components/Notes'
 
 function App() {
   const [tasklist, settasklist] = useState([])
-  
+  const [mode, setmode] = useState(false)
+
   useEffect(() => {
     console.log(tasklist);
   }, [tasklist])
+  useEffect(() => {
+    setmode(localStorage.getItem("mode")=="false"?false:true);
+  },)
+  
   
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <><Navbar headline={"Notes"}/><Notes/></>,
+      element: <><Navbar headline={"Notes"} mode={mode} setmode={setmode} /><Notes/></>,
     },
     {
       path: "/todo",
-      element: <><Navbar headline={"Todo"}/><Todo tasklist={tasklist} settasklist={settasklist}/></>,
+      element: <><Navbar headline={"Todo"} mode={mode} setmode={setmode}/><Todo tasklist={tasklist} settasklist={settasklist}/></>,
     },
     {
       path: "/Login",
@@ -35,9 +40,9 @@ function App() {
   ])
 
   return (
-    <>
+    <div className={mode?"app-dark":"app-light"}>
       <RouterProvider router={router}/>
-    </>
+    </div>
   )
 }
 

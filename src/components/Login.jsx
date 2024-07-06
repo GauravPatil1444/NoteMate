@@ -1,8 +1,13 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import "./Login.css"
+import "./Login-mobile.css"
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import google from "../assets/google.png"
+import { setDoc,doc } from 'firebase/firestore';
+import { db } from '../firebase';
 
 const Login = () => {
     const {
@@ -28,11 +33,26 @@ const Login = () => {
           window.location.href = "/";
         }
         catch(error){
-          alert("Login unsuccessful !")
+          alert("user data not found");
           console.log(error.message);
         }
       }
-      const onSubmit = async (data) =>{
+      const googlesignin = async ()=>{
+        const provider = new GoogleAuthProvider();
+        signInWithPopup(auth,provider).then(async(result)=>{
+          if(result.user){
+            const user = result.user;
+            await setDoc(doc(db,"Users",user.uid),{
+              email :user.email,
+              username: user.displayName,
+              photo: user.photoURL
+            });
+           localStorage.setItem("status",true); 
+           window.location.href="/"; 
+          }
+        });
+      }
+      const onSubmit = async () =>{
         handlelogin();
         await delay(2)
       }
@@ -40,8 +60,9 @@ const Login = () => {
       return (
         <>
           <div className='form'>
-            <p>Login</p>
+            <p>NoteMate</p>
             <form action=" " method="post" onSubmit={handleSubmit(onSubmit)}>
+              <p>Login</p>
               <input className='inp' type="email" placeholder='email' {...register("email",{required:{value:true,message:"This field is required !"}})}/>
               {errors.email && <div className='red'>{errors.email.message}</div>}
               <br />
@@ -50,7 +71,9 @@ const Login = () => {
               <br />
               <input className='submitbtn' disabled={isSubmitting} type="submit" value="Login" />
                 {isSubmitting && <div className='loader'>Loading...</div>}
-              <div className="create-signin">Haven't created account yet ? <a className='create-signin' href="/create">Create now</a></div>  
+              <div className="create-signin">Don't have an account? <a className='link' href="/create">Create now</a></div>  
+              <div id='or'><div></div> OR <div></div></div>
+              <button id='google'><img onClick={()=>{googlesignin();}} id='googleimg' src={google} alt="couldn't load"/></button>
             </form>
           </div>
         </>

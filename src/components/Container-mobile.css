@@ -12,10 +12,11 @@
         position: relative;
     }
     .inp{
-        width: 62% !important;
+        width: 60% !important;
         padding: 4px;
     }
     .inpsection{
+        width: 90%;
         padding: 1%;
         padding-bottom: 2%;
         gap: 12px

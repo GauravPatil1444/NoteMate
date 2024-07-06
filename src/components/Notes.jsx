@@ -7,6 +7,8 @@ import { useEffect } from 'react'
 import trash from "../assets/trash.png"
 import recycle from "../assets/recycle-bin.png" 
 import cross from "../assets/cross.png"
+import light_loader from "../assets/light_loader.png"
+import dark_loader from "../assets/dark_loader.png"
 import { auth } from '../firebase'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { db } from '../firebase'
@@ -22,17 +24,18 @@ const Notes = () => {
     const [deleted, setdeleted] = useState([])
     const [history, sethistory] = useState([])
     const [deleteview, setdeleteview] = useState(false)
+    const [loader, setloader] = useState(true)
     const title = useRef()
 
     
     useEffect(() => {
-      if(localStorage.getItem("status")){
+      if(localStorage.getItem("status")=="true"){
         fetchdata();
       }
       else{
         window.location.href="/Login";
       }
-    }, [])
+    },[])
 
     const updatelist = (list)=>{
       const titlelist = [];
@@ -85,6 +88,7 @@ const Notes = () => {
             }
             setNotes(notesdata);
             setdeleted(deldata);
+            setloader(false);
           }
           catch(error){
             console.log(error.message());
@@ -114,6 +118,9 @@ const Notes = () => {
         Notes.length==0?setNotes(notelist):setNotes([...Notes,[titleinp,noteinp]]);
         settitleinp("");
         setnoteinp(""); 
+        setaddnote(false);
+      }
+      else{
         setaddnote(false);
       }
       if (edit[0]) {
@@ -198,11 +205,13 @@ const Notes = () => {
         <div className="addnotecontainer">
           {!addnote?<input id='takenote' type="text" className='noteinp'placeholder='Take a note' onClick={()=>{setaddnote(true)}} />:<div className='addnote' onMouseLeave={()=>{setaddnote(false),setnoteinp(""),settitleinp(""),setedit(false)}}><textarea ref={title} value={titleinp} onChange={(e)=>{settitleinp(e.target.value)}} type="text" id='title' className='noteinp' placeholder='Title'/><textarea onChange={(e)=>{setnoteinp(e.target.value)}} value={noteinp} type="text" id='note' className='noteinp' placeholder='Note'/><div className='addnote-footer'><><button id='addbtn' onClick={HandleAdd}>Done</button><div id='Notes-btns'>{edit[0] && <button onClick={()=>{HandleDelete();}} id='delbtn'><img src={trash} width={25} alt="couldn't load"/></button>} {deleteview&&edit[0] &&<button onClick={()=>{handlerecycle()}} id='rycbtn'><img src={recycle} width={25} alt="couldn't load"/></button>}</div></></div></div>}
         </div>
+        {showbtn&&deleted.length==0&& <div><p id='delcontent'>No deleted content</p></div>}
         <div className="notecontainer">
+          {loader&&<div id='loader'><img width={35} src={localStorage.getItem("mode")=="true"?dark_loader:light_loader} alt="couldn't"/></div>}
           {!showbtn?Notes.map((note,i)=>(
-            <div onClick={()=>{HandleEdit(note,i)}} className='notelayout'><div className="title">{note[0]}</div><div className="note">{note[1]}</div></div>
+            <div key={i} onClick={()=>{HandleEdit(note,i)}} className='notelayout'><div className="title">{note[0]}</div><div className="note">{note[1]}</div></div>
             )):deleted.map((note,i)=>(
-            <div onClick={()=>{HandleEdit(note,i)}} className='notelayout'><div className="title">{note[0]}</div><div className="note">{note[1]}</div></div>
+            <div key={i} onClick={()=>{HandleEdit(note,i)}} className='notelayout'><div className="title">{note[0]}</div><div className="note">{note[1]}</div></div>
             ))
           }
         </div>

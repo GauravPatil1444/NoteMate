@@ -19,7 +19,7 @@
     flex-flow: column-reverse;
   }
 .container{
-    background-color: rgba(198, 231, 255, 0.578);
+    background-color: var(--containerbackground);
     width: 40vw;
     height: 60vh;
     margin-top: 12vh;
@@ -35,20 +35,21 @@
     display: none;
 }
 .inp{
-    border: 1px solid black;
+    border: 1px solid var(--element);
     background-color: transparent;
     padding: 8px;
     width: 72% !important;
     border-radius: 8px;
     font-size: medium;
+    color: var(--element);
 }
 .inp:focus{
     outline: none;
-    border: 2px solid  rgb(59, 173, 255);  
+    border: 2px solid  var(--secondaryblue);  
 }
 .inpsection{
     height: fit-content;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid var(--element);
     padding: 2%;
     margin: 15px;
     background-color: transparent;
@@ -58,16 +59,17 @@
 }
 #addbtn{
     width: fit-content;
-    border: 1px solid black;
-    background-color: rgb(50, 170, 255);
+    border: 1px solid var(--border);
+    background-color: var(--primaryblue);
     padding: 8px;
     border-radius: 8px;
     font-size: medium;
     cursor: pointer;
+    text-wrap: nowrap;
 }
 #addbtn:active{
     outline: none;
-    background-color: rgb(82, 180, 250);
+    background-color: var(--secondaryblue);
 }
 .taskcontainer{
     background-color: transparent;
@@ -78,7 +80,6 @@
     padding: 2%; 
     gap: 8px;
     flex-wrap: wrap;
-    /* background-color: aqua; */
     align-items: center;
 }
 .taskcontainer::-webkit-scrollbar {
@@ -90,12 +91,13 @@
     overflow-x: scroll;
     align-items: center;
     overflow-wrap: anywhere;
+    color: var(--element);
 }
 .task::-webkit-scrollbar {
     display: none;
 }
 .tasklayout{
-    border: 1px solid black;
+    border: 1px solid var(--element);
     width: 85%;
     padding: 5px;
     border-radius: 8px;
@@ -103,7 +105,7 @@
     gap: 15px;
 }
 .delbtn{
-    background-color: red;
+    background-color: var(--red);
     width: fit-content;
     border: none;
     padding: 8px;
@@ -114,10 +116,10 @@
     align-items: center;
 }
 .delbtn img{ 
-    background-color: red;
+    background-color: var(--red);
 }
 .rycbtn{
-    background-color: green;
+    background-color: var(--green);
     width: fit-content;
     border: none;
     padding: 8px;
@@ -128,10 +130,10 @@
     align-items: center;
 }
 .rycbtn img{ 
-    background-color: green;
+    background-color: var(--green);
 }
 .edtbtn{
-    background-color: rgb(50, 170, 255);
+    background-color: var(--primaryblue);
     width: fit-content;
     padding: 8px;
     border-radius: 8px;
@@ -142,7 +144,7 @@
     align-items: center;
 }
 .edtbtn img{ 
-    background-color: rgb(50, 170, 255);
+    background-color: var(--primaryblue);
 }
 #showdeleted{
     width: 52px;
@@ -154,7 +156,7 @@
     margin: auto;
     border-radius: 50%;
     padding: 15px;
-    background-color: rgb(50, 170, 255);
+    background-color: var(--primaryblue);
     outline: none;
     border: none;
     cursor: pointer;
@@ -164,9 +166,17 @@
 }
 #showdeleted img{
     width: 25px;
-    background-color: rgb(50, 170, 255);
+    background-color: var(--primaryblue);
 }
 #showdeleted:active{
-background-color: rgb(82, 180, 250);
+background-color: var(--secondaryblue);
 outline: none;
 }   
+#loader img{
+    animation: loader 2s linear 0s infinite reverse;
+}
+@keyframes loader {
+    0%{
+        transform: rotate(360deg);       
+    }
+}

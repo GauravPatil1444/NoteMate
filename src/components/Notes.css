@@ -8,6 +8,7 @@
     height: 100vh;
     display: flex;
     justify-content: center;
+    overflow-y: hidden;
 }
 .content{
     width: 65vw;
@@ -16,7 +17,6 @@
     justify-content: center;
     padding: 5px;
     margin-top: 10vh;
-    background-color: brown;
 }
 .noteinp{
     width: 90%;
@@ -30,24 +30,26 @@
     resize: none;
 }
 .noteinp:focus{
-    border: 2px solid rgb(50, 170, 255);
+    border: 2px solid var(--primaryblue);
 }
 .addnote{
     width: fit-content;
     height: fit-content;    
     padding: 15px;
-    box-shadow: 0.5px 0.5px 15px 0.5px; 
+    box-shadow: 1px 1px 5px var(--element); 
     border-radius: 8px;
 }
 #title{
     font-size: x-large; 
     height: 4vh;
+    color: var(--element);
 }
 #note{
     height: 4vh;
+    color: var(--element);
 }
 #takenote{
-    box-shadow: 0.5px 0.5px 15px 0.5px; 
+    box-shadow: 1px 1px 5px var(--element); 
 }
 .addnote-footer{
     display: flex;
@@ -58,7 +60,7 @@
 #addbtn{
     width: fit-content;
     border: none;
-    background-color: rgb(50, 170, 255);
+    background-color: var(--primaryblue);
     padding: 8px;
     border-radius: 8px;
     font-size: medium;
@@ -66,19 +68,19 @@
 }
 #addbtn:active{
     outline: none;
-    background-color: rgb(82, 180, 250);
+    background-color: var(--secondaryblue);
 }
 .showdeleted{
     width: 52px;
     height: 55px;
     position: fixed;
-    top: 11vh;
+    top: 10vh;
     left: 81vw;
     display: inline-block;
     margin: auto;
     border-radius: 50%;
     padding: 15px;
-    background-color: rgb(50, 170, 255);
+    background-color: var(--primaryblue);
     outline: none;
     border: none;
     cursor: pointer;
@@ -88,40 +90,49 @@
 }
 .showdeleted img{
     width: 25px;
-    background-color: rgb(50, 170, 255);
+    background-color: var(--primaryblue);
 }
 .showdeleted:active{
-background-color: rgb(82, 180, 250);
+background-color: var(--secondaryblue);
 outline: none;
 }   
 .notelayout{
-    width: fit-content;
-    height: fit-content;
-    max-width: 40vw;
-    max-height: 40vh;
+    min-width:  8vw;    
+    min-height: 8vh;
+    max-width: 25vw;
+    max-height: 25vh;
     padding: 5px;
-    border: 1px solid black;
+    border: 1px solid var(--element);
     background-color: transparent;
     border-radius: 8px;
     overflow-wrap: anywhere;
+    flex: 1 1 auto;
+    overflow-y: scroll; 
+    transition: linear 0.2s;
     cursor: pointer;
 }
 .notelayout:hover{
-    border: 2px solid rgb(82, 180, 250);
+    border: 2px solid var(--secondaryblue);
+    transform: scale(1.01,1.01);
 }
 .title{
     font-size: larger;
+    color: var(--element);
+    padding: 2px;
+}
+.note{
+    color: var(--element);
+    padding: 2px;
 }
 .notecontainer{
     margin-top: 2%;
     display: flex;
-    flex-direction: row;
     background-color: transparent;
     gap: 15px;
-    overflow-x: hidden;
     overflow-y: scroll;
     flex-wrap: wrap;
-    background-color: aqua;
+    align-items: flex-start;
+    padding: 5px;
 }
 .addnotecontainer{
     background-color: transparent;
@@ -129,7 +140,7 @@ outline: none;
     justify-content: center;
 }
 #delbtn{
-    background-color: red;
+    background-color: var(--red);
     width: fit-content;
     border: none;
     padding: 8px;
@@ -140,10 +151,10 @@ outline: none;
     align-items: center;
 }
 #delbtn img{ 
-    background-color: red;
+    background-color: var(--red);
 }
 #rycbtn{
-    background-color: green;
+    background-color: var(--green);
     width: fit-content;
     border: none;
     padding: 8px;
@@ -154,10 +165,26 @@ outline: none;
     align-items: center;
 }
 #rycbtn img{ 
-    background-color: green;
+    background-color: var(--green);
 }
 #Notes-btns{
  display: flex;
  flex-direction: row;
  gap: 8px;   
+}
+#delcontent{
+    font-size: large;
+}
+#loader{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+#loader img{
+    animation: loader 2s linear 0s infinite reverse;
+}
+@keyframes loader {
+    0%{
+        transform: rotate(360deg);       
+    }
 }

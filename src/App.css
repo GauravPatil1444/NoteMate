@@ -1,0 +1,29 @@
+.app-light{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-color: aliceblue;
+    --primaryblue: rgb(50, 170, 255);
+    --secondaryblue: rgb(82, 180, 250); 
+    --red : red;
+    --green : green;
+    --containerbackground: rgba(198, 231, 255, 0.578);
+    --element: black;
+}
+.app-dark{
+    position: absolute;
+    top: 0%;
+    left: 0%; 
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-color: #0e1521;
+    --primaryblue: rgb(50, 170, 255);
+    --secondaryblue: rgb(82, 180, 250); 
+    --red : red;
+    --green : green;
+    --containerbackground: rgb(14 61 95 / 58%);
+    --element: aliceblue;
+}

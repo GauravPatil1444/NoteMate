@@ -5,6 +5,8 @@ import trash from "../assets/trash.png"
 import recycle from "../assets/recycle-bin.png" 
 import editicon from "../assets/edit.png"
 import cross from "../assets/cross.png"
+import light_loader from "../assets/light_loader.png"
+import dark_loader from "../assets/dark_loader.png"
 import { auth } from '../firebase'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { db } from '../firebase'
@@ -17,15 +19,16 @@ const Todo = (props) => {
   const [showbtn, setshowbtn] = useState(false)
   const [edit, setedit] = useState([false,0])
   const [addbtn, setaddbtn] = useState("Add task +")
+  const [loader, setloader] = useState(true)
 
   useEffect(() => {
-    if(localStorage.getItem("status")){
+    if(localStorage.getItem("status")=="true"){
       fetchdata();
     }
     else{
       window.location.href="/Login";
     }
-  }, [])
+  },[])
 
   const updatelist = (list)=>{
     auth.onAuthStateChanged(async(user)=>{
@@ -47,15 +50,21 @@ const Todo = (props) => {
     auth.onAuthStateChanged(async (user)=>{
       const docref = doc(db,"Users",user.uid);
       const docsnap = await getDoc(docref);
-      if(docsnap.exists()){
-        console.log(docsnap.data());
-        setdeleted(docsnap.data().deleted);
-        props.settasklist(docsnap.data().tasklist);
+      try{
+        if(docsnap.exists()){
+          console.log(docsnap.data());
+          setdeleted(docsnap.data().deleted);
+          props.settasklist(docsnap.data().tasklist);
+          setloader(false);
+        }
+        else{
+          console.log("No data in the database !")
+        }
       }
-      else{
-        console.log("No data in the database !")
+      catch(error){
+        console.log(error.message); 
       }
-    }) 
+    }); 
   }
   
   const handleAdd = ()=>{
@@ -135,10 +144,10 @@ const Todo = (props) => {
         <button onClick={handleAdd} id='addbtn'>{addbtn}</button>
       </span>
       <div className='taskcontainer'>
-    
+        {loader&&<div id='loader'><img width={35} src={localStorage.getItem("mode")=="true"?dark_loader:light_loader} alt="couldn't"/></div>}
         {!showbtn?props.tasklist.map((task,i)=>(
           <div key={i} className='tasklayout'><span className='task'>{task}</span><button onClick={()=>{handleedit(i,task)}} className='edtbtn'><img src={editicon} width={25} alt="couldn't load"/></button><button onClick={()=>{handleDelete(i,task)}} className='delbtn'><img src={trash} width={25} alt="couldn't load"/></button></div>
-        )):deleted.length==0?<div><h3 style={{backgroundColor : "rgba(198, 231, 255, 0.578)"}}>No deleted content</h3></div>:deleted.map((task,i)=>(
+        )):deleted.length==0?<div><h3 style={{backgroundColor : "transparent",color: "var(--element)"}}>No deleted content</h3></div>:deleted.map((task,i)=>(
           <div key={i} className='tasklayout'><span className='task'>{task}</span><button onClick={()=>{handlerecycle(i,task)}} className='rycbtn'><img src={recycle} width={25} alt="couldn't load"/></button><button onClick={()=>{permanentdel(i)}} className='delbtn'><img src={trash} width={25} alt="couldn't load"/></button></div>
         ))}    
 
