@@ -59,6 +59,7 @@ const Todo = (props) => {
         }
         else{
           console.log("No data in the database !")
+          setloader(false);
         }
       }
       catch(error){

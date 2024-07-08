@@ -17,7 +17,9 @@ const Create = () => {
         await setDoc(doc(db,"Users",user.uid),{
           email :user.email,
           username: getValues("username"),
-          photo: "null"
+          photo: "null",
+          tasklist: [],
+          deleted: []
         });
         localStorage.setItem("status",true);
         window.location.href="/"

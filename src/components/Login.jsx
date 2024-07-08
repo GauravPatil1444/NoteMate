@@ -45,7 +45,9 @@ const Login = () => {
             await setDoc(doc(db,"Users",user.uid),{
               email :user.email,
               username: user.displayName,
-              photo: user.photoURL
+              photo: user.photoURL,
+              tasklist: [],
+              deleted: []
             });
            localStorage.setItem("status",true); 
            window.location.href="/"; 

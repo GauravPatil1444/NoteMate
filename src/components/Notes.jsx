@@ -92,10 +92,12 @@ const Notes = () => {
           }
           catch(error){
             console.log(error.message());
+            setloader(false);
           }
         }
         else{
           console.log("No data in the database !")
+          setloader(false);
         }
       }) 
     }
