@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import './Login.css';
 import './Login-mobile.css';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import google from '../assets/google.png';
-import { setDoc, doc } from 'firebase/firestore';
-import { db } from '../firebase';
+import { auth, db } from '../firebase.js';
+import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js';
+import { setDoc, doc } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -86,7 +84,7 @@ const Login = () => {
           <div id="or">
             <div></div> OR <div></div>
           </div>
-          <button id="google" onClick={googlesignin}>
+          <button id="google" type="button" onClick={googlesignin}>
             <img id="googleimg" src={google} alt="Google Logo" />
           </button>
         </form>
