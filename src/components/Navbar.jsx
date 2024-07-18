@@ -6,9 +6,9 @@ import profileimg from "../assets/profileimg.png"
 import headlineNotes from "../assets/headlineNotes.png"
 import headlineTodo from "../assets/headlineTodo.png"
 import cross from "../assets/cross.png"
-import { auth } from '../firebase';
-import { doc,getDoc } from 'firebase/firestore'
-import { db } from '../firebase'
+import { auth } from '../firebase.js';  
+import { doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js';
+import { db } from '../firebase.js';
 
 const Navbar = ({headline,mode,setmode}) => {
 

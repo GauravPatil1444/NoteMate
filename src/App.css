@@ -10,6 +10,7 @@
     --green : green;
     --containerbackground: rgba(198, 231, 255, 0.578);
     --element: black;
+    --background:aliceblue;
 }
 .app-dark{
     position: absolute;
@@ -26,4 +27,5 @@
     --green : green;
     --containerbackground: rgb(14 61 95 / 58%);
     --element: aliceblue;
+    --background:#0e1521;
 }

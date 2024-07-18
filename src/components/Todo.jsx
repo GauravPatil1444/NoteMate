@@ -7,9 +7,9 @@ import editicon from "../assets/edit.png"
 import cross from "../assets/cross.png"
 import light_loader from "../assets/light_loader.png"
 import dark_loader from "../assets/dark_loader.png"
-import { auth } from '../firebase'
-import { doc, getDoc, setDoc } from 'firebase/firestore'
-import { db } from '../firebase'
+import { auth } from '../firebase.js';  
+import { doc, getDoc, setDoc} from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js';
+import { db } from '../firebase.js';
 
 const Todo = (props) => {
 
