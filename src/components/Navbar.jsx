@@ -55,7 +55,6 @@ const Navbar = ({headline,mode,setmode}) => {
         <button className='profilebtn'onClick={()=>{settoggle(!toggle)}}>{!toggle?<img className='profileimg' src={profileimg} width={35} alt="couldn't load"/>:<img className='profile' width={28} src={cross} alt="couldn't load"/>}</button>
       </div>
       {toggle && <div className='userprofile'>
-        {profile[2]!=""&&<img className='profileimg' src={profile[2]} width={35} alt="couldn't load"/>}
         <div>Name: {profile[0]}</div>
         <div>email: {profile[1]}</div>
         <button onClick={()=>{logout();}}>Logout</button>
