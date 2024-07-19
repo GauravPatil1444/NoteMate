@@ -25,6 +25,7 @@ form{
     background-color: var(--primaryblue);
     border: 1px solid var(--element);
     font-size: larger;
+    cursor: pointer;
 }
 .submitbtn:active{
     outline: none;
