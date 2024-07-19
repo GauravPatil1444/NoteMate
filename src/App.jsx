@@ -24,7 +24,6 @@ function App() {
   useEffect(() => {
     // Simulate loading delay
     setTimeout(() => {
-      console.log("ooh",isLoading);
       setIsLoading(false); // Hide loader after loading
     }, 100); // Adjust the timeout as needed
   }, []);
