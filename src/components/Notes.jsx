@@ -20,6 +20,7 @@ const Notes = () => {
     const [titleinp, settitleinp] = useState("") 
     const [noteinp, setnoteinp] = useState("")
     const [showbtn, setshowbtn] = useState(false)
+    const [takenote, settakenote] = useState(true)
     const [edit, setedit] = useState([false,0])
     const [deleted, setdeleted] = useState([])
     const [history, sethistory] = useState([])
@@ -113,6 +114,7 @@ const Notes = () => {
     }, [addnote])
 
     const HandleAdd = ()=>{
+      settakenote(true);
       if (titleinp!="" || noteinp!="") { 
         const notelist = [...Notes];
         notelist.splice(0,0,[titleinp,noteinp]);
@@ -138,6 +140,7 @@ const Notes = () => {
     }
 
     const HandleEdit = (note,i)=>{
+      settakenote(false);
       setaddnote(true);
       setedit([true,i]);
       settitleinp(note[0]);
@@ -145,6 +148,7 @@ const Notes = () => {
     }
 
     const HandleDelete = ()=>{
+      settakenote(true);
       if(deleteview){
         const deletenote = [...deleted];
         deletenote.splice(edit[1],1);
@@ -204,11 +208,12 @@ const Notes = () => {
   return (
     <div className='notes'>
        <div className="content">
-        <div className="addnotecontainer">
-          {!addnote?<input id='takenote' type="text" className='noteinp'placeholder='Take a note' onClick={()=>{setaddnote(true)}} />:<div className='addnote' onMouseLeave={()=>{setaddnote(false),setnoteinp(""),settitleinp(""),setedit(false)}}><textarea ref={title} value={titleinp} onChange={(e)=>{settitleinp(e.target.value)}} type="text" id='title' className='noteinp' placeholder='Title'/><textarea onChange={(e)=>{setnoteinp(e.target.value)}} value={noteinp} type="text" id='note' className='noteinp' placeholder='Note'/><div className='addnote-footer'><><button id='addbtn' onClick={HandleAdd}>Done</button><div id='Notes-btns'>{edit[0] && <button onClick={()=>{HandleDelete();}} id='delbtn'><img src={trash} width={25} alt="couldn't load"/></button>} {deleteview&&edit[0] &&<button onClick={()=>{handlerecycle()}} id='rycbtn'><img src={recycle} width={25} alt="couldn't load"/></button>}</div></></div></div>}
+       <div className="addnotecontainer">
+          {!showbtn&&takenote&&<input id='takenote' type="text" placeholder='Take a note' onClick={()=>{setaddnote(true),settakenote(false)}} />}{addnote&&<div className='addnote' onMouseLeave={()=>{setaddnote(false),settakenote(true),setnoteinp(""),settitleinp(""),setedit(false)}}><div className='addnote-header'><><button id='addbtn' onClick={HandleAdd}>Done</button><div id='Notes-btns'>{edit[0] && <button onClick={()=>{HandleDelete();}} id='delbtn'><img src={trash} width={25} alt="couldn't load"/></button>} {deleteview&&edit[0] &&<button onClick={()=>{handlerecycle()}} id='rycbtn'><img src={recycle} width={25} alt="couldn't load"/></button>}</div></></div><textarea ref={title} value={titleinp} onChange={(e)=>{settitleinp(e.target.value)}} type="text" id='title' className='noteinp' placeholder='Title'/><textarea onChange={(e)=>{setnoteinp(e.target.value)}} value={noteinp} type="text" id='note' className='noteinp' placeholder='Note'/></div>}
         </div>
+        {showbtn&&<div><p id='delheading'>Recycle bin</p></div>}
         {showbtn&&deleted.length==0&& <div><p id='delcontent'>No deleted content</p></div>}
-        <div className="notecontainer">
+        {takenote&&<div className="notecontainer">
           {loader&&<div id='loader'><img width={35} src={localStorage.getItem("mode")=="true"?dark_loader:light_loader} alt="couldn't"/></div>}
           {!showbtn?Notes.map((note,i)=>(
             <div key={i} onClick={()=>{HandleEdit(note,i)}} className='notelayout'><div className="title">{note[0]}</div><div className="note">{note[1]}</div></div>
@@ -216,8 +221,8 @@ const Notes = () => {
             <div key={i} onClick={()=>{HandleEdit(note,i)}} className='notelayout'><div className="title">{note[0]}</div><div className="note">{note[1]}</div></div>
             ))
           }
-        </div>
-        <button onClick={()=>{setshowbtn(!showbtn),setdeleteview(!deleteview)}} className='showdeleted'>{showbtn?<img src={cross} alt="couldn't load" />:<img src={recycle} alt="couldn't load"/>}</button>
+        </div>}
+        {takenote&&<button onClick={()=>{setshowbtn(!showbtn),setdeleteview(!deleteview)}} className='showdeleted'>{showbtn?<img src={cross} alt="couldn't load" />:<img src={recycle} alt="couldn't load"/>}</button>}
         </div>
 
     </div>

@@ -4,6 +4,7 @@
     display: flex;
     justify-content: center;
     background-color: aliceblue;
+    --background: aliceblue;
     --primaryblue: rgb(50, 170, 255);
     --secondaryblue: rgb(82, 180, 250); 
     --red : red;
@@ -20,6 +21,7 @@
     display: flex;
     justify-content: center;
     background-color: #0e1521;
+    --background: #0e1521;
     --primaryblue: rgb(50, 170, 255);
     --secondaryblue: rgb(82, 180, 250); 
     --red : red;

@@ -34,10 +34,10 @@
 }
 .addnote{
     width: fit-content;
-    height: fit-content;    
     padding: 15px;
     box-shadow: 1px 1px 5px var(--element); 
     border-radius: 8px;
+    height: 100%;    
 }
 #title{
     font-size: x-large; 
@@ -47,15 +47,24 @@
 #note{
     height: 4vh;
     color: var(--element);
+    height: 60vh;
 }
 #takenote{
-    box-shadow: 1px 1px 5px var(--element); 
+    box-shadow: 1px 1px 5px var(--element);
+    width: 90%;
+    padding: 10px;
+    height: fit-content; 
+    font-size: larger;
+    border-radius: 8px;
+    border: none;
+    outline: none;
 }
-.addnote-footer{
+.addnote-header{
     display: flex;
     flex-direction: row-reverse;
     gap: 8px;
     justify-content: space-between;
+    margin-bottom: 5px;
 }
 #addbtn{
     width: fit-content;
@@ -174,6 +183,9 @@ outline: none;
 }
 #delcontent{
     font-size: large;
+}
+#delheading{
+    margin-top: 0%;
 }
 #loader{
     width: 100%;

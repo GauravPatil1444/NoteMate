@@ -63,6 +63,7 @@ const Login = () => {
         <>
           <div className='form'>
             <p>NoteMate</p>
+            <div id="formbackground">
             <form action=" " method="post" onSubmit={handleSubmit(onSubmit)}>
               <p>Login</p>
               <input className='inp' type="email" placeholder='email' {...register("email",{required:{value:true,message:"This field is required !"}})}/>
@@ -75,8 +76,11 @@ const Login = () => {
                 {isSubmitting && <div className='loader'>Loading...</div>}
               <div className="create-signin">Don't have an account? <a className='link' href="/create">Create now</a></div>  
               <div id='or'><div></div> OR <div></div></div>
-              <button id='google'><img onClick={()=>{googlesignin();}} id='googleimg' src={google} alt="couldn't load"/></button>
             </form>
+              <div className="formfooter">
+                <button id='google' onClick={()=>{googlesignin();}}><img id='googleimg' src={google} alt="couldn't load"/><p id='googletxt'>Continue with Google</p></button>
+              </div>
+            </div>
           </div>
         </>
       )

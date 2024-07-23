@@ -5,6 +5,8 @@ import "./Login.css"
 import "./Login-mobile.css"
 import { auth,db } from '../firebase'
 import { doc, setDoc } from 'firebase/firestore'
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import google from "../assets/google.png"
 
 const Create = () => {
 
@@ -30,6 +32,25 @@ const Create = () => {
     }
     // console.log(email,password);
   }
+
+  const googlesignin = async ()=>{
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth,provider).then(async(result)=>{
+      if(result.user){
+        const user = result.user;
+        await setDoc(doc(db,"Users",user.uid),{
+          email :user.email,
+          username: user.displayName,
+          photo: user.photoURL,
+          tasklist: [],
+          deleted: []
+        });
+       localStorage.setItem("status",true); 
+       window.location.href="/"; 
+      }
+    });
+  }
+
   const {
         register,
         getValues,
@@ -54,6 +75,7 @@ const Create = () => {
         <>
           <div className='form'>
             <p>NoteMate</p>
+            <div id="formbackground">
             <form action=" " method="post" onSubmit={handleSubmit(onSubmit)}>
               <p>Create account</p>
               <input className='inp' type="text" placeholder='Username'{...register("username",{required:{value:true,message:"This field is required !"},minLength:{value:4,message:"Minimum length is 4"},maxLength:{value:20,message:"Maximum length is 10"}})}/>
@@ -68,7 +90,12 @@ const Create = () => {
               <input className='submitbtn' disabled={isSubmitting} type="submit" value="Create" />
                 {isSubmitting && <div className='loader'>Loading...</div>}
               <div className="create-signin">Already has an account ! <a className='link' href="/Login">Login</a></div>  
-            </form>
+              <div id='or'><div></div> OR <div></div></div>
+              </form>
+              <div className="formfooter">
+                <button id='google' onClick={()=>{googlesignin();}}><img id='googleimg' src={google} alt="couldn't load"/><p id='googletxt'>Continue with Google</p></button>
+              </div>             
+            </div>
           </div>
         </>
       )

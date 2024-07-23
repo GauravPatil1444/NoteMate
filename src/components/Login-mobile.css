@@ -2,11 +2,14 @@
     form{
         width: 80vw;
     }
+    .form{
+        margin-top: 30px;
+    }
     .inp{
         width: 60vw !important;
     }
     #googleimg{
-        width: 70%;
+        width: 28px;
     }
 
 }

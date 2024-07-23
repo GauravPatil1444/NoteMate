@@ -5,15 +5,21 @@
     align-items: center;
     flex-direction: column;
 }
-form{
-    padding: 10px;
+#formbackground{
+    background-color: var(--containerbackground);
     border-radius: 12px;
+    padding: 10px;
+}
+.formfooter{
+    display: flex;
+    justify-content: center;
+}
+form{
     height: fit-content;
     width: 30vw;
     display: flex;
     align-items: center;
     flex-direction: column;
-    background-color: var(--containerbackground);
 }
 .inp{
     width: 80%;
@@ -55,7 +61,7 @@ p{
     color: var(--element);
 }
 .link{
-    color: var(--primaryblue);
+    color: rgb(0, 149, 255);
     text-decoration: none;
 }
 #or{
@@ -73,12 +79,24 @@ p{
     height: 0.1px;
 }
 #google{
+    height: 38px;
     display: flex;
-    justify-content: center;
-    border: none;
-    outline: none;
+    align-items: center;
+    border: 1px solid var(--element);
+    border-radius: 20px;
+    background-color: var(--background);
+    cursor: pointer;
+}
+#google:hover{
+    background-color: var(--containerbackground);
+    border: 1px solid rgb(0, 149, 255);
+}
+#googletxt{
+    font-size: larger;
+    margin-left: 10px;
+    color: var(--element);
 }
 #googleimg{
-    width: 50%;
+    width: 24px;
     cursor: pointer;
 }
