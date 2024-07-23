@@ -202,6 +202,7 @@ const Notes = () => {
       settitleinp("");
       setnoteinp(""); 
       setaddnote(false);
+      settakenote(true);
       setedit(false);
     }
 
@@ -211,7 +212,7 @@ const Notes = () => {
        <div className="addnotecontainer">
           {!showbtn&&takenote&&<input id='takenote' type="text" placeholder='Take a note' onClick={()=>{setaddnote(true),settakenote(false)}} />}{addnote&&<div className='addnote' onMouseLeave={()=>{setaddnote(false),settakenote(true),setnoteinp(""),settitleinp(""),setedit(false)}}><div className='addnote-header'><><button id='addbtn' onClick={HandleAdd}>Done</button><div id='Notes-btns'>{edit[0] && <button onClick={()=>{HandleDelete();}} id='delbtn'><img src={trash} width={25} alt="couldn't load"/></button>} {deleteview&&edit[0] &&<button onClick={()=>{handlerecycle()}} id='rycbtn'><img src={recycle} width={25} alt="couldn't load"/></button>}</div></></div><textarea ref={title} value={titleinp} onChange={(e)=>{settitleinp(e.target.value)}} type="text" id='title' className='noteinp' placeholder='Title'/><textarea onChange={(e)=>{setnoteinp(e.target.value)}} value={noteinp} type="text" id='note' className='noteinp' placeholder='Note'/></div>}
         </div>
-        {showbtn&&<div><p id='delheading'>Recycle bin</p></div>}
+        {showbtn&&takenote&&<div><p id='delheading'>Recycle bin</p></div>}
         {showbtn&&deleted.length==0&& <div><p id='delcontent'>No deleted content</p></div>}
         {takenote&&<div className="notecontainer">
           {loader&&<div id='loader'><img width={35} src={localStorage.getItem("mode")=="true"?dark_loader:light_loader} alt="couldn't"/></div>}
