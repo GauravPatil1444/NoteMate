@@ -6,6 +6,7 @@ import profileimg from "../assets/profileimg.png"
 import headlineNotes from "../assets/headlineNotes.png"
 import headlineTodo from "../assets/headlineTodo.png"
 import cross from "../assets/cross.png"
+import cross_light from "../assets/cross_light.png"
 import { auth } from '../firebase';
 import { doc,getDoc } from 'firebase/firestore'
 import { db } from '../firebase'
@@ -52,7 +53,7 @@ const Navbar = ({headline,mode,setmode}) => {
       <div className="headline">{headline}</div> 
       <div className="btns">
         <button className="btn" onClick={()=>{window.location.href = headline=="Todo"?"/":"/todo"}}>{headline=="Todo"?"Notes":"Todo"}{headline=="Todo"?<img className='headlineimg' width={24} src={headlineNotes} alt="couldn't load"/>:<img className='headlineimg' width={24} src={headlineTodo} alt="couldn't load"/>}</button>
-        <button className='profilebtn'onClick={()=>{settoggle(!toggle)}}>{!toggle?<img className='profileimg' src={profileimg} width={35} alt="couldn't load"/>:<img className='profile' width={28} src={cross} alt="couldn't load"/>}</button>
+        <button className='profilebtn'onClick={()=>{settoggle(!toggle)}}>{!toggle?<img className='profileimg' src={profileimg} width={35} alt="couldn't load"/>:localStorage.getItem("mode")=="true"?<img className='profile' width={28} src={cross} alt="couldn't load"/>:<img className='profile' width={28} src={cross_light} alt="couldn't load"/>}</button>
       </div>
       {toggle && <div className='userprofile'>
         <div>Name: {profile[0]}</div>
