@@ -26,7 +26,7 @@ const Notes = () => {
     const [history, sethistory] = useState([])
     const [deleteview, setdeleteview] = useState(false)
     const [loader, setloader] = useState(true)
-    const title = useRef()
+    const note = useRef()
 
     
     useEffect(() => {
@@ -108,8 +108,8 @@ const Notes = () => {
     }, [Notes])
     
     useEffect(() => {
-       if(addnote && title.current){
-            title.current.focus();
+       if(addnote && note.current){
+            note.current.focus();
        }
     }, [addnote])
 
@@ -210,7 +210,7 @@ const Notes = () => {
     <div className='notes'>
        <div className="content">
        <div className="addnotecontainer">
-          {!showbtn&&takenote&&<input id='takenote' type="text" placeholder='Take a note' onClick={()=>{setaddnote(true),settakenote(false)}} />}{addnote&&<div className='addnote' onMouseLeave={()=>{setaddnote(false),settakenote(true),setnoteinp(""),settitleinp(""),setedit(false)}}><div className='addnote-header'><><button id='addbtn' onClick={HandleAdd}>Done</button><div id='Notes-btns'>{edit[0] && <button onClick={()=>{HandleDelete();}} id='delbtn'><img src={trash} width={25} alt="couldn't load"/></button>} {deleteview&&edit[0] &&<button onClick={()=>{handlerecycle()}} id='rycbtn'><img src={recycle} width={25} alt="couldn't load"/></button>}</div></></div><textarea ref={title} value={titleinp} onChange={(e)=>{settitleinp(e.target.value)}} type="text" id='title' className='noteinp' placeholder='Title'/><textarea onChange={(e)=>{setnoteinp(e.target.value)}} value={noteinp} type="text" id='note' className='noteinp' placeholder='Note'/></div>}
+          {!showbtn&&takenote&&<input id='takenote' type="text" placeholder='Take a note' onClick={()=>{setaddnote(true),settakenote(false)}} />}{addnote&&<div className='addnote' onMouseLeave={()=>{setaddnote(false),settakenote(true),setnoteinp(""),settitleinp(""),setedit(false)}}><div className='addnote-header'><><button id='addbtn' onClick={HandleAdd}>Done</button><div id='Notes-btns'>{edit[0] && <button onClick={()=>{HandleDelete();}} id='delbtn'><img src={trash} width={25} alt="couldn't load"/></button>} {deleteview&&edit[0] &&<button onClick={()=>{handlerecycle()}} id='rycbtn'><img src={recycle} width={25} alt="couldn't load"/></button>}</div></></div><textarea value={titleinp} onChange={(e)=>{settitleinp(e.target.value)}} type="text" id='title' className='noteinp' placeholder='Title'/><textarea  ref={note} onChange={(e)=>{setnoteinp(e.target.value)}} value={noteinp} type="text" id='note' className='noteinp' placeholder='Note'/></div>}
         </div>
         {showbtn&&takenote&&<div><p id='delheading'>Recycle bin</p></div>}
         {showbtn&&deleted.length==0&& <div><p id='delcontent'>No deleted content</p></div>}

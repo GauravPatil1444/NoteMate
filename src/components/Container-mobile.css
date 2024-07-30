@@ -1,4 +1,4 @@
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 480px),(min-height: 1000px) {
     .heading{
         margin-top: 5%;
         font-weight: bolder;
@@ -12,7 +12,7 @@
         position: relative;
     }
     .inp{
-        width: 60% !important;
+        width: 65% !important;
         padding: 4px;
     }
     .inpsection{
@@ -29,7 +29,7 @@
     }
     .tasklayout{
         display: flex;
-        align-items: center;
+        justify-content: space-between;
     }
     .tasklayout button{
         height: fit-content;

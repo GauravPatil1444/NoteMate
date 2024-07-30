@@ -21,7 +21,7 @@
 .container{
     background-color: var(--containerbackground);
     width: 40vw;
-    height: 60vh;
+    height: 70vh;
     margin-top: 12vh;
     border-radius: 12px;
     overflow-y: scroll;
@@ -38,7 +38,7 @@
     border: 1px solid var(--element);
     background-color: transparent;
     padding: 8px;
-    width: 72% !important;
+    width: 82% !important;
     border-radius: 8px;
     font-size: medium;
     color: var(--element);
@@ -63,7 +63,7 @@
     background-color: var(--primaryblue);
     padding: 8px;
     border-radius: 8px;
-    font-size: medium;
+    font-size: large;
     cursor: pointer;
     text-wrap: nowrap;
 }
@@ -92,17 +92,24 @@
     align-items: center;
     overflow-wrap: anywhere;
     color: var(--element);
+    padding: 10px 0px 10px 0px;
+    font-size: larger;
 }
 .task::-webkit-scrollbar {
     display: none;
 }
 .tasklayout{
     border: 1px solid var(--element);
-    width: 85%;
+    width: 90%;
     padding: 5px;
     border-radius: 8px;
     display: flex;
-    gap: 15px;
+    justify-content: space-between;
+    gap: 5px;
+}
+.tasklayout:hover{
+    border: 1px solid var(--primaryblue);
+    cursor: pointer;
 }
 .delbtn{
     background-color: var(--red);
@@ -179,4 +186,34 @@ outline: none;
     0%{
         transform: rotate(360deg);       
     }
+}
+#recycleheading{
+    color: var(--element);
+}
+#timeinput{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    justify-content: center;
+}
+#timeinput input{
+    width: 20%;
+    text-align: center;
+    border-radius: 8px;
+    border: 2px solid var(--primaryblue);
+    font-size: large;
+    outline: none
+}
+#ampm{
+    border-radius: 8px;
+    border: 2px solid var(--primaryblue);
+    outline: none;
+}
+#timebtn{
+    background-color: var(--primaryblue);
+    outline: none;
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: large;
 }
