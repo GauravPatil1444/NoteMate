@@ -77,6 +77,7 @@ const Todo = (props) => {
   const handleAdd = ()=>{
     const list = [...props.tasklist]
     if(edit[0]){
+      setloader(false);
       list.splice(edit[1],1,inp);
       props.settasklist(list);
       updatelist(list);
@@ -84,7 +85,8 @@ const Todo = (props) => {
       setinp("")
       setaddbtn("Add")
     }
-    else{
+    if(inp!=""){
+      setloader(false);
       props.settasklist([...list,inp])
       setinp("")
       updatelist([...list,inp]);

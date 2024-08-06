@@ -38,104 +38,92 @@ const Notes = () => {
       }
     },[])
 
-    const updatelist = (list)=>{
-      const titlelist = [];
-      const notesarr = [];
-      list.map((note,i)=>(
-        titlelist.splice(i,0,note[0])
-      ))
-      list.map((note,i)=>(
-        notesarr.splice(i,0,note[1])
-      ))
-      auth.onAuthStateChanged(async(user)=>{
-        await setDoc(doc(db, "Users", `${user.uid}/Notes/NoteMate_Notes`), {
-          titles: titlelist,
-          notes : notesarr
-        }, { merge: true });
-      })
-    }
+    const updatelist = (list) => {
+      const reversedList = [...list].reverse();
+      const titlelist = reversedList.map(note => note[0]);
+      const notesarr = reversedList.map(note => note[1]);
+      auth.onAuthStateChanged(async (user) => {
+          await setDoc(doc(db, "Users", `${user.uid}/Notes/NoteMate_Notes`), {
+              titles: titlelist,
+              notes: notesarr
+          }, { merge: true });
+      });
+  };
 
-    const decrementlist = (list)=>{
-      const deltitlelist = [];
-      const delnotesarr = [];
-      list.map((note,i)=>(
-        deltitlelist.splice(i,0,note[0])
-      ))
-      list.map((note,i)=>(
-        delnotesarr.splice(i,0,note[1])
-      ))
-      auth.onAuthStateChanged(async(user)=>{
-        await setDoc(doc(db, "Users", `${user.uid}/Notes/NoteMate_Notes`), {
-          deletednotes: delnotesarr,
-          deletedtitles: deltitlelist
-        }, { merge: true });
-      })
-    }
+  const decrementlist = (list) => {
+      const reversedList = [...list].reverse();
+      const deltitlelist = reversedList.map(note => note[0]);
+      const delnotesarr = reversedList.map(note => note[1]);
+      auth.onAuthStateChanged(async (user) => {
+          await setDoc(doc(db, "Users", `${user.uid}/Notes/NoteMate_Notes`), {
+              deletednotes: delnotesarr,
+              deletedtitles: deltitlelist
+          }, { merge: true });
+      });
+  };
 
-    const fetchdata = async ()=>{
-      auth.onAuthStateChanged(async (user)=>{
-        const docref = doc(db,"Users",`${user.uid}/Notes/NoteMate_Notes`);
-        const docsnap = await getDoc(docref);
-        if(docsnap.exists()){
-          console.log(docsnap.data());
-          try{
-            const notesdata = [];
-            const deldata= [];
-            for (let i = 0; i<docsnap.data().titles.length; i++) {
-              notesdata.splice(i,0,[docsnap.data().titles[i],docsnap.data().notes[i]])
-            }
-            for (let i = 0; i<docsnap.data().deletedtitles.length; i++) {
-              deldata.splice(i,0,[docsnap.data().deletedtitles[i],docsnap.data().deletednotes[i]])
-            }
-            setNotes(notesdata);
-            setdeleted(deldata);
-            setloader(false);
+  const fetchdata = async () => {
+    auth.onAuthStateChanged(async (user) => {
+      const docref = doc(db, "Users", `${user.uid}/Notes/NoteMate_Notes`);
+      const docsnap = await getDoc(docref);
+      if (docsnap.exists()) {
+        try {
+          const notesdata = [];
+          const deldata = [];
+          for (let i = 0; i < docsnap.data().titles.length; i++) {
+            notesdata.push([docsnap.data().titles[i], docsnap.data().notes[i]]);
           }
-          catch(error){
-            console.log(error.message());
-            setloader(false);
+          for (let i = 0; i < docsnap.data().deletedtitles.length; i++) {
+            deldata.push([docsnap.data().deletedtitles[i], docsnap.data().deletednotes[i]]);
           }
-        }
-        else{
-          console.log("No data in the database !")
+          setNotes(notesdata.reverse());
+          setdeleted(deldata.reverse());
+          setloader(false);
+          }
+        catch (error) {
+          console.log(error.message);
           setloader(false);
         }
-      }) 
-    }
+      } 
+      else{
+        console.log("No data in the database !");
+        setloader(false);
+      }
+    });
+  }
 
     useEffect(() => {
      console.log(Notes);
     }, [Notes])
     
     useEffect(() => {
-       if(addnote && note.current){
-            note.current.focus();
-       }
+      if(addnote && note.current){
+        note.current.focus();
+      }
     }, [addnote])
 
-    const HandleAdd = ()=>{
+    const HandleAdd = () => {
+      setloader(false)
       settakenote(true);
-      if (titleinp!="" || noteinp!="") { 
-        const notelist = [...Notes];
-        notelist.splice(0,0,[titleinp,noteinp]);
-        Notes.length==0?updatelist(notelist):updatelist([...Notes,[titleinp,noteinp]]);
-        Notes.length==0?setNotes(notelist):setNotes([...Notes,[titleinp,noteinp]]);
+      if (titleinp !== "" || noteinp !== "") {
+        const notelist = [[titleinp, noteinp], ...Notes];
+        updatelist(notelist);
+        setNotes(notelist);
         settitleinp("");
-        setnoteinp(""); 
+        setnoteinp("");
         setaddnote(false);
-      }
-      else{
+      } else {
         setaddnote(false);
       }
       if (edit[0]) {
         const noteList = [...Notes];
-        noteList.splice(edit[1],1,[titleinp,noteinp])
+        noteList[edit[1]] = [titleinp, noteinp];
         setNotes(noteList);
         updatelist(noteList);
         settitleinp("");
         setnoteinp("");
         setaddnote(false);
-        setedit(false);
+        setedit([false, 0]);
       }
     }
 
